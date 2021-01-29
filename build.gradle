@@ -1,0 +1,31 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+plugins {
+	id "com.github.johnrengelman.shadow" version "6.0.0"
+	id "java"
+}
+
+group = "op65n.tech"
+version = "0.0.1-Alpha"
+
+repositories {
+	mavenCentral()
+	maven { url "https://papermc.io/repo/repository/maven-public/" }
+	maven { url "https://oss.sonatype.org/content/groups/public/" }
+	maven { url "http://repo.dmulloy2.net/nexus/repository/public/" }
+}
+
+dependencies {
+	compileOnly "com.comphenix.protocol:ProtocolLib:4.5.1"
+	compileOnly "com.destroystokyo.paper:paper-api:1.16.4-R0.1-SNAPSHOT"
+}
+
+shadowJar {
+	archiveFileName.set("ChatToggle.jar")
+}
+
+processResources {
+	from(sourceSets.main.resources.srcDirs) {
+		filter ReplaceTokens, tokens: [version: version]
+	}
+}

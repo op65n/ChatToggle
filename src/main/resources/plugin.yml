@@ -1,0 +1,6 @@
+name: ChatToggle
+version: @version@
+main: op65n.tech.chattoggle.ChatTogglePlugin
+api-version: 1.16
+author: Frcsty
+depend: ["ProtocolLib"]
