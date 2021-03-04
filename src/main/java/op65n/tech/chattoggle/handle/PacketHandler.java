@@ -33,23 +33,27 @@ public final class PacketHandler {
                 new PacketAdapter(plugin, ListenerPriority.NORMAL, PacketType.Play.Server.CHAT) {
                     @Override
                     public void onPacketSending(final PacketEvent event) {
-                        final UUID identifier = event.getPlayer().getUniqueId();
-                        final String eventMessage = validatePacketEvent(event);
-
-                        if (!event.isServerPacket()) return;
-
-                        final MessageQueue queue = PacketHandler.this.plugin.getMessageQueue();
-                        final MessageEntry entry = queue.getEntry(identifier, eventMessage);
-
-                        if (entry != null) {
-                            event.setCancelled(true);
-                            return;
-                        }
-
-                        queue.addEntry(identifier, eventMessage);
+                        handlePacket(event);
                     }
                 }
         );
+    }
+
+    private void handlePacket(final PacketEvent event) {
+        final UUID identifier = event.getPlayer().getUniqueId();
+        final String eventMessage = validatePacketEvent(event);
+
+        if (!event.isServerPacket()) return;
+
+        final MessageQueue queue = PacketHandler.this.plugin.getMessageQueue();
+        final MessageEntry entry = queue.getEntry(identifier, eventMessage);
+
+        if (entry != null) {
+            event.setCancelled(true);
+            return;
+        }
+
+        queue.addEntry(identifier, eventMessage);
     }
 
     private String validatePacketEvent(final PacketEvent event) {

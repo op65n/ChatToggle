@@ -26,6 +26,8 @@ public final class MessageQueue {
         dumpExpiredEntries(identifier);
 
         final Optional<MessageEntry> match = messageQueue.getOrDefault(identifier, new ArrayList<>()).stream()
+                .filter(Objects::nonNull)
+                .filter(entry -> Objects.nonNull(entry.getMessage()))
                 .filter(entry -> entry.getMessage().equalsIgnoreCase(message))
                 .findAny();
 

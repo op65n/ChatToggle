@@ -5,7 +5,7 @@ plugins {
 	id "java"
 }
 
-group = "op65n.tech"
+group = "op65n.tech.chattoggle"
 version = "0.0.1-Alpha"
 
 repositories {
@@ -17,7 +17,7 @@ repositories {
 
 dependencies {
 	compileOnly "com.comphenix.protocol:ProtocolLib:4.5.1"
-	compileOnly "com.destroystokyo.paper:paper-api:1.16.4-R0.1-SNAPSHOT"
+	compileOnly "com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT"
 }
 
 shadowJar {
